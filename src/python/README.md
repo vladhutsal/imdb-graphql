@@ -3,6 +3,7 @@ Setup python env:
 ```
 virtualenv -p python3 .venv
 . .venv/bin/activate
+pip install poetry
 poetry install
 ```
 
