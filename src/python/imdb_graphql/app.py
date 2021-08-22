@@ -3,7 +3,6 @@ from flask_graphql import GraphQLView
 
 from .database import init_db, session
 from .schema import schema
-
 app = Flask(__name__)
 app.Debug = True
 
