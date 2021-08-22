@@ -7,6 +7,10 @@ pip install poetry
 poetry install
 ```
 
+Set db url (in alchemy format https://docs.sqlalchemy.org/en/14/core/engines.html#postgresql) via env var:
+
+`export ALCHEMY_URL=postgresql://taras@localhost/taras`
+
 For dev run with
 
 `cd imdb_graphql && FLASK_ENV=development flask run`

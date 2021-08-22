@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-
-engine = create_engine('postgresql://taras@localhost/taras')
+from os import environ as env
+engine = create_engine(env.get('ALCHEMY_URL', 'postgresql://taras@localhost/taras'))
 
 session = scoped_session(sessionmaker(
     autocommit=False,
