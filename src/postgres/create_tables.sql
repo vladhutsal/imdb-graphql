@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS titles CASCADE;
 CREATE TABLE titles (
-    tconst char(9) primary key,
+    tconst varchar primary key,
     titleType varchar(20),
     primaryTitle text,
     originalTitle text,
@@ -8,7 +8,7 @@ CREATE TABLE titles (
     startYear smallint,
     endYear smallint,
     runtimeMinutes integer,
-    genres varchar(20)[]
+    genres varchar
 );
 
 ALTER TABLE titles ADD COLUMN title_search_col tsvector;

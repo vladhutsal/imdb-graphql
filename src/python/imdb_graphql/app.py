@@ -9,7 +9,7 @@ app.Debug = True
 
 default_query = '''
 {
-  movie(imdbID: "tt7040874") {
+  movie(imdbID: "7040874") {
     imdbID
   }
 }

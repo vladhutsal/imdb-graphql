@@ -13,10 +13,10 @@ class TitleType(Enum):
 
 
 class Title(Base):
-    __tablename__ = 'titles'
+    __tablename__ = 'title_basics'
 
-    imdbID = Column('tconst', String, primary_key=True)
-    titleType = Column('titletype', String)
+    imdbID = Column('tconst', Integer, primary_key=True)
+    titleType = Column('titleType', String)
     _type = column_property(
         case(
             {
@@ -28,13 +28,13 @@ class Title(Base):
             else_='movie'
         )
     )
-    primaryTitle = Column('primarytitle', String)
-    originalTitle = Column('originaltitle', String)
-    isAdult = Column('isadult', Integer)
-    startYear = Column('startyear', Integer)
-    endYear = Column('endyear', Integer)
-    runtime = Column('runtimeminutes', Integer)
-    genres = Column('genres', ARRAY(String))
+    primaryTitle = Column('primaryTitle', String)
+    originalTitle = Column('originalTitle', String)
+    isAdult = Column('isAdult', Integer)
+    startYear = Column('startYear', Integer)
+    endYear = Column('endYear', Integer)
+    runtime = Column('runtimeMinutes', Integer)
+    genres = Column('genres', String)
     rating = relationship(
         'Rating',
         foreign_keys=imdbID,
@@ -43,7 +43,7 @@ class Title(Base):
     )
     averageRating = association_proxy('rating', 'averageRating')
     numVotes = association_proxy('rating', 'numVotes')
-    title_search_col = Column('title_search_col')
+    # title_search_col = Column('title_search_col')
 
     __mapper_args__ = {'polymorphic_on': _type}
 
@@ -89,8 +89,8 @@ class EpisodeInfo(Base):
 
 
 class Rating(Base):
-    __tablename__ = 'ratings'
+    __tablename__ = 'title_ratings'
 
-    imdbID = Column('tconst', String, primary_key=True)
-    averageRating = Column('averagerating', Float)
-    numVotes = Column('numvotes', Integer)
+    imdbID = Column('tconst', Integer, primary_key=True)
+    averageRating = Column('averageRating', Float)
+    numVotes = Column('numVotes', Integer)

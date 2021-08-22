@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('postgresql://imdb:@/imdb')
+engine = create_engine('postgresql://taras@localhost/taras')
 
 session = scoped_session(sessionmaker(
     autocommit=False,
@@ -15,5 +15,5 @@ Base.query = session.query_property()
 
 
 def init_db():
-    from models import Title, Movie, Series, Episode, EpisodeInfo, Rating
+    from .models import Title, Movie, Series, Episode, EpisodeInfo, Rating
     Base.metadata.reflect(engine)

@@ -24,7 +24,7 @@ class Title(graphene.Interface):
     startYear = graphene.Int()
     endYear = graphene.Int()
     runtime = graphene.Int()
-    genres = graphene.List(graphene.String)
+    genres = graphene.String()
     averageRating = graphene.Float()
     numVotes = graphene.Int()
 
