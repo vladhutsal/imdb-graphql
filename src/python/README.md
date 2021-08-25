@@ -22,6 +22,7 @@ for prod run with
 Go to http://127.0.0.1:5000/imdb enter
 
 ```
+{
   movie(imdbID: "7040874") {
     __typename,
     imdbID,
@@ -31,5 +32,5 @@ Go to http://127.0.0.1:5000/imdb enter
     averageRating,
     numVotes
   }
-
+}
 ```
