@@ -34,3 +34,80 @@ Go to http://127.0.0.1:5000/imdb enter
   }
 }
 ```
+
+Use search
+```
+{ 
+  search(title: "Show") {
+    imdbID
+    titleType
+    primaryTitle
+    originalTitle
+    isAdult
+    startYear
+    endYear
+    runtime
+    genres
+    averageRating
+    numVotes
+  }
+}
+```
+
+name query
+```
+{ 
+  name(imdbID: "98") {
+    imdbID,
+    primaryName,
+    knownForTitles,
+    birthYear,
+    deathYear,
+    primaryProfession,
+    knownForTitles
+  }
+}
+```
+
+Example of nested query
+```
+{ 
+  series(imdbID: "7203552") {
+    imdbID
+    runtime
+    titleType
+    primaryTitle
+    originalTitle
+    isAdult
+    startYear
+    endYear
+    genres
+    averageRating
+    numVotes
+    totalSeasons,
+    episodes {
+      series {
+        episodes {
+          series {
+            episodes {
+              imdbID
+              runtime
+              titleType
+              primaryTitle
+              originalTitle
+              isAdult
+              startYear
+              endYear
+              genres
+              averageRating
+              numVotes
+              seasonNumber
+              episodeNumber
+            }
+          }
+        }
+      } 
+    }
+  } 
+}
+```

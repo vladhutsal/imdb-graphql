@@ -1,4 +1,4 @@
-from sqlalchemy import case, Column, Integer, Float, String, ARRAY
+from sqlalchemy import case, Column, Integer, Float, String
 from sqlalchemy.orm import column_property, relationship, backref
 from sqlalchemy.ext.associationproxy import association_proxy
 from enum import Enum
@@ -11,7 +11,6 @@ class TitleType(Enum):
     SERIES = 'series'
     EPISODE = 'episode'
 
-
 class Title(Base):
     __tablename__ = 'title_basics'
 
@@ -20,9 +19,9 @@ class Title(Base):
     _type = column_property(
         case(
             {
-                'tvSeries': 'series',
-                'tvMiniSeries': 'series',
-                'tvEpisode': 'episode'
+                'tv series': 'series',
+                'tv mini series': 'series',
+                'episode': 'episode'
             },
             value=titleType,
             else_='movie'
@@ -43,7 +42,7 @@ class Title(Base):
     )
     averageRating = association_proxy('rating', 'averageRating')
     numVotes = association_proxy('rating', 'numVotes')
-    # title_search_col = Column('title_search_col')
+    titleSearchCol = Column('titleSearchCol')
 
     __mapper_args__ = {'polymorphic_on': _type}
 
@@ -74,12 +73,12 @@ class Episode(Title):
 
 
 class EpisodeInfo(Base):
-    __tablename__ = 'episodes'
+    __tablename__ = 'title_episode'
 
     imdbID = Column('tconst', String, primary_key=True)
-    seriesID = Column('parenttconst', String)
-    seasonNumber = Column('seasonnumber', Integer)
-    episodeNumber = Column('episodenumber', Integer)
+    seriesID = Column('parentTconst', String)
+    seasonNumber = Column('seasonNumber', Integer)
+    episodeNumber = Column('episodeNumber', Integer)
     series = relationship(
         'Series',
         foreign_keys=seriesID,
@@ -94,3 +93,13 @@ class Rating(Base):
     imdbID = Column('tconst', Integer, primary_key=True)
     averageRating = Column('averageRating', Float)
     numVotes = Column('numVotes', Integer)
+
+class Name(Base):
+    __tablename__ = 'name_basics'
+
+    imdbID = Column('nconst', Integer, primary_key=True)
+    birthYear = Column('birthYear', Integer)
+    deathYear = Column('deathYear', Integer)
+    primaryName = Column('primaryName', String)
+    knownForTitles = Column('knownForTitles', String)
+    primaryProfession = Column('primaryProfession', String)
