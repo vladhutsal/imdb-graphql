@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: ${PWD}/src/postgres/postgres.dockerfile
+    
+    networks:
+      - default
+
+    env_file: ${PWD}/.env.dev
+    volumes:
+      - ${PWD}/src/postgres:/imdb_data
+      - imdb:/var/lib/postgresql/data
+    # entrypoint: database_set/init_database.sh
+
+
+  flask:
+    depends_on:
+      - postgres
+    networks:
+      - default
+  
+    env_file: ${PWD}/.env.dev
+    working_dir: /flask/imdb_graphql
+    
+    build:
+      context: ${PWD}/src/python
+      dockerfile: ${PWD}/src/python/graphql.dockerfile
+    ports:
+      - 5000:5000
+    volumes:
+      - ./src/python/:/flask
+    command: python3 -m flask run -h 0.0.0.0 -p 5000
+
+
+  jeager:
+    image: jw_jaeger:latest
+    networks:
+      - default
+    
+    ports:
+      - 16686:16686
+  
+volumes:
+  imdb:

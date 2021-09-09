@@ -12,6 +12,8 @@ psycopg2-binary = "^2.7"
 flask = "^1.0"
 flask-graphql = "^2.0"
 graphene-sqlalchemy = "^2.1"
+sqlalchemy_opentracing = "^0.1.6"
+jaeger-client = "3.13.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
