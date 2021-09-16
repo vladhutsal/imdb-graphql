@@ -8,10 +8,10 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false
 
 COPY pyproject.toml /flask
-RUN poetry install --no-root --no-dev
+# RUN poetry install --no-root --no-dev
 
 COPY . /flask
 
-RUN poetry install --no-dev
+RUN poetry install
 WORKDIR /imdb_graphql/
 EXPOSE 5000

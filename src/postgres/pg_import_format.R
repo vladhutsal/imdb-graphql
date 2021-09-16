@@ -2,7 +2,7 @@ library(tidyverse)
 
 source("read_imdb.R")
 
-data_dir <- file.path("..", "..", "data")
+data_dir <- file.path("tsv", "datasets.imdbws.com")
 
 pg_array <- function(x) ifelse(is.na(x) | x == "", NA, sprintf("{{%s}}", x))
 

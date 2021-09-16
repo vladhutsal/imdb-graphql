@@ -22,6 +22,9 @@ services:
       - default
   
     env_file: ${PWD}/.env.dev
+    environment:
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_AGENT_PORT=6831
     working_dir: /flask/imdb_graphql
     
     build:
@@ -34,13 +37,15 @@ services:
     command: python3 -m flask run -h 0.0.0.0 -p 5000
 
 
-  jeager:
+  jaeger:
     image: jw_jaeger:latest
     networks:
       - default
     
     ports:
+
       - 16686:16686
+      - 6831:6831/udp
   
 volumes:
   imdb:
